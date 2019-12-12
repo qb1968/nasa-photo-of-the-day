@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import styled from 'styled-components';
+
 import "./App.css";
 import axios from "axios";
 import HeaderComponent from './HeaderComponent/HeaderComponent';
@@ -21,7 +23,7 @@ function App() {
 
 
   useEffect(() => {
-    axios.get('https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY ')
+    axios.get('https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY')
      .then(response => {
        console.log(response.data.message);
        setPhoto(response.data.url);
@@ -31,15 +33,23 @@ function App() {
      })
      .catch(error => console.log(error))
   }, []);
+
+  const ContainerDiv = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background:black;
+`;
+  
   return (
-    <div className="App">
+    <ContainerDiv>
       <HeaderComponent />
         
       <PhotoComponent url = {photo} />
        
       <InfoComponent title = {title} date = {date} explanation = {explanation} />
       
-    </div>
+    </ContainerDiv>
   );
 }
 
